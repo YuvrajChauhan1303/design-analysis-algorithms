@@ -5,10 +5,18 @@ int findCondition(int A[], int p, int r);
 
 // Driver Code
 int main() {
-    // Example usage:
-    int A[] = {0, 1, 2, 3, 5, 6, 7};
-    int size = sizeof(A) / sizeof(A[0]);
+    int size;
+    int i = 0;
 
+    std::cout << "Enter the number of Elements for the Array: ";
+    std::cin >> size;
+
+    int* arr = new int[size];
+
+    for (i = 0; i < size; i++) {
+        std::cout << "Enter the Element for index " << i + 1 << " : ";
+        std::cin >> arr[i];
+    }
     int result = findCondition(A, 0, size - 1);
 
     if (result != -1) 
