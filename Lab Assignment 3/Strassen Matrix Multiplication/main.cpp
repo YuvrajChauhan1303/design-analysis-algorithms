@@ -1,130 +1,277 @@
-#include<iostream>
+#include <iostream>
 
-//Function Declaration
+// Function Declaration:
+void matrixAddition(int **A, int **B, int **C, int n);
+void matrixSubtraction(int **A, int **B, int **C, int n);
+void strassenMultiplication(int **A, int **B, int **C, int n);
 
-int * Strassen_Multiplication(int * X, int * Y, int * Z, int n);
-int * Matrix_Addition(int * X, int * Y, int * Sum, int n);
-int * Matrix_Subtraction(int * X, int * Y, int * Sum, int n);
-void display(int * X, int n);
-
-// Driver Code
-
+// Driver Code:
 int main()
 {
-    //Variable Declaration
-    int i;
-    int j;
     int n;
+    std::cout << "Enter the size of matrices (power of 2): ";
+    std::cin >> n;
 
-    std::cout << "Enter Size of Matrix: ";
-    std::cin >> n; 
-    int X[n][n];
-    int Y[n][n];
-    int Sum[n][n];
-    int Diff[n][n];
+    int **A = new int *[n];
+    int **B = new int *[n];
+    int **C = new int *[n];
 
-    std::cout << "Enter Values for Matrix X:" << std::endl;
-
-    for(i = 0 ; i < n ; i++)
+    for (int i = 0; i < n; i++)
     {
-        for(j = 0 ; j < n ; j++)
+        A[i] = new int[n];
+        B[i] = new int[n];
+        C[i] = new int[n];
+    }
+
+    std::cout << "Enter elements of matrix A:" << std::endl;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
         {
-            std::cout << "Enter Value for " << i + 1 << " Row and " << j + 1 << " Col: " ;
-            std::cin >> X[i][j];
+            std::cin >> A[i][j];
         }
     }
 
-    std::cout << "Enter Values for Matrix Y:" << std::endl;
-
-    for(i = 0 ; i < n ; i++)
+    std::cout << "Enter elements of matrix B:" << std::endl;
+    for (int i = 0; i < n; i++)
     {
-        for(j = 0 ; j < n ; j++)
+        for (int j = 0; j < n; j++)
         {
-            std::cout << "Enter Value for " << i + 1 << " Row and " << j + 1 << " Col: " ;
-            std::cin >> Y[i][j];
+            std::cin >> B[i][j];
         }
     }
 
-    std::cout << std::endl << "Matrix 1:" << std::endl;
-    display(&X[0][0], n);
+    strassenMultiplication(A, B, C, n);
 
-    std::cout << std::endl << "Matrix 2:" << std::endl;
-    display(&Y[0][0], n);
+    std::cout << "Resultant matrix C:" << std::endl;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+            std::cout << C[i][j] << " ";
 
-    Matrix_Addition(&X[0][0],&Y[0][0],&Sum[0][0],n);
-    std::cout << std::endl << "Matrix 3:" << std::endl;
-    display(&Sum[0][0], n);
-
-    Matrix_Subtraction(&X[0][0],&Y[0][0],&Sum[0][0],n);
-    std::cout << std::endl << "Matrix 4\:" << std::endl;
-    display(&Sum[0][0], n);
-
+        std::cout << std::endl;
+    }
 
     return 0;
 }
 
-// Function Defintion
-int * Matrix_Addition(int * X, int * Y, int * Sum, int n)
-{
-    int i = 0;
-    int j = 0; 
-    int sum = 0;
+// Function Definition
 
-    for(i = 0; i < n ; i++)
+void matrixAddition(int **A, int **B, int **C, int n)
+{
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            C[i][j] = A[i][j] + B[i][j];
+}
+
+void matrixSubtraction(int **A, int **B, int **C, int n)
+{
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            C[i][j] = A[i][j] - B[i][j];
+}
+
+void strassenMultiplication(int **A, int **B, int **C, int n)
+{
+    if (n == 2)
     {
-        sum = 0;
-        for(j = 0 ; j<n ; j++)
+        int P = (A[0][0] + A[1][1]) * (B[0][0] + B[1][1]);
+        int Q = (A[1][0] + A[1][1]) * B[0][0];
+        int R = A[0][0] * (B[0][1] - B[1][1]);
+        int S = A[1][1] * (B[1][0] - B[0][0]);
+        int T = (A[0][0] + A[0][1]) * B[1][1];
+        int U = (A[1][0] - A[0][0]) * (B[0][0] + B[0][1]);
+        int V = (A[0][1] - A[1][1]) * (B[1][0] + B[1][1]);
+
+        C[0][0] = P + S - T + V;
+        C[0][1] = R + T;
+        C[1][0] = Q + S;
+        C[1][1] = P + R - Q + U;
+    }
+    else
+    {
+        int newSize = n / 2;
+
+        int **a = new int *[newSize];
+        int **b = new int *[newSize];
+        int **c = new int *[newSize];
+        int **d = new int *[newSize];
+
+        int **e = new int *[newSize];
+        int **f = new int *[newSize];
+        int **g = new int *[newSize];
+        int **h = new int *[newSize];
+
+        int **I = new int *[newSize];
+        int **J = new int *[newSize];
+        int **K = new int *[newSize];
+        int **L = new int *[newSize];
+
+        for (int i = 0; i < newSize; i++)
         {
-            sum = *(X + i + j) + * (Y + i + j);
-            *(Sum + i + j) = sum;
+            a[i] = new int[newSize];
+            b[i] = new int[newSize];
+            c[i] = new int[newSize];
+            d[i] = new int[newSize];
+
+            e[i] = new int[newSize];
+            f[i] = new int[newSize];
+            g[i] = new int[newSize];
+            h[i] = new int[newSize];
+
+            I[i] = new int[newSize];
+            J[i] = new int[newSize];
+            K[i] = new int[newSize];
+            L[i] = new int[newSize];
+
+            for (int j = 0; j < newSize; j++)
+            {
+                a[i][j] = A[i][j];
+                b[i][j] = A[i][j + newSize];
+                c[i][j] = A[i + newSize][j];
+                d[i][j] = A[i + newSize][j + newSize];
+
+                e[i][j] = B[i][j];
+                f[i][j] = B[i][j + newSize];
+                g[i][j] = B[i + newSize][j];
+                h[i][j] = B[i + newSize][j + newSize];
+            }
         }
-        
-    }
 
-    return Sum;
-}
+        int **P1 = new int *[newSize];
+        int **P2 = new int *[newSize];
+        int **P3 = new int *[newSize];
+        int **P4 = new int *[newSize];
+        int **P5 = new int *[newSize];
+        int **P6 = new int *[newSize];
+        int **P7 = new int *[newSize];
 
-int * Matrix_Subtraction(int * X, int * Y, int * Diff, int n)
-{
-    int i = 0;
-    int j = 0; 
-    int diff = 0;
-
-    for(i = 0; i < n ; i++)
-    {
-        diff = 0;
-        for(j = 0 ; j<n ; j++)
+        for (int i = 0; i < newSize; i++)
         {
-            diff = *(X + i + j) - * (Y + i + j);
-            *(Diff + i + j) = diff;
+            P1[i] = new int[newSize];
+            P2[i] = new int[newSize];
+            P3[i] = new int[newSize];
+            P4[i] = new int[newSize];
+            P5[i] = new int[newSize];
+            P6[i] = new int[newSize];
+            P7[i] = new int[newSize];
         }
+
+        int **result1 = new int * [newSize];
+        int **result2 = new int * [newSize];
+        int **result3 = new int * [newSize];
+        int **result4 = new int * [newSize];
+        int **result5 = new int * [newSize];
+        int **result6 = new int * [newSize];
+        int **result7 = new int * [newSize];
+        int **result8 = new int * [newSize];
+        int **result9 = new int * [newSize];
+        int **result10 = new int * [newSize];
+        int **result11 = new int * [newSize];
+        int **result12 = new int * [newSize];
+        int **result13 = new int * [newSize];
+        int **result14 = new int * [newSize];
+        int **result15 = new int * [newSize];
+        int **result16 = new int * [newSize];
+        int **result17 = new int * [newSize];
+        int **result18 = new int * [newSize];
+
+        for (int i = 0; i < newSize; i++)
+        {
+            result1[i] =  new int[newSize];
+            result2[i] =  new int[newSize];
+            result3[i] =  new int[newSize];
+            result4[i] =  new int[newSize];
+            result5[i] =  new int[newSize];
+            result6[i] =  new int[newSize];
+            result7[i] =  new int[newSize];
+            result8[i] =  new int[newSize];
+            result9[i] =  new int[newSize];
+            result10[i] = new int[newSize];
+            result11[i] = new int[newSize];
+            result12[i] = new int[newSize];
+            result13[i] = new int[newSize];
+            result14[i] = new int[newSize];
+            result15[i] = new int[newSize];
+            result16[i] = new int[newSize];
+            result17[i] = new int[newSize];
+            result18[i] = new int[newSize];
+        }
+
+        //P1 = A * (F - H)
+        matrixSubtraction(f,h, result1, newSize);
+        strassenMultiplication(a, result1, P1, newSize);
+
+        //P2 = (A + B) * H
+        matrixAddition(a, b, result2, newSize);
+        strassenMultiplication(result2, h, P2, newSize);
         
+        //P3 = (C + D) * E
+        matrixAddition(c, d, result3, newSize);
+        strassenMultiplication(result3, e, P3, newSize);
+
+        //P4 = D * (G - E)
+        matrixSubtraction(g, e, result4, newSize);
+        strassenMultiplication(d, result4, P4, newSize);
+        
+        //P5 = (A + D) * (E + H)
+        matrixAddition(a, d, result5, newSize);
+        matrixAddition(e, h, result6, newSize);
+        strassenMultiplication(result5, result6, P5, newSize);
+
+        //P6 = (B - D) * (G + H)
+        matrixSubtraction(b,d, result7, newSize);
+        matrixAddition(g, h, result8, newSize);
+        strassenMultiplication(result7, result8, P6, newSize);
+
+        //P7 = (A - C) * (E + F)
+        matrixSubtraction(a, c, result9, newSize);
+        matrixAddition(e, f, result10, newSize);
+
+        // I = P5 + P4 - P2 + P6
+        matrixAddition(P5, P4, result11, newSize);
+        matrixSubtraction(result11, P2, result12, newSize);
+        matrixAddition(result12, P6, result13, newSize);
+
+        for(int i = 0 ; i < newSize; i++)
+            for(int j = 0 ; j < newSize ; j++)
+                I[i][j] = result13[i][j];
+
+        // J = P1 + P2
+        matrixAddition(P1, P2, result14, newSize);
+        
+        for(int i = 0 ; i < newSize; i++)
+            for(int j = 0 ; j < newSize ; j++)
+                J[i][j] = result14[i][j];
+
+        // K = P3 + P4
+        matrixAddition(P3, P4, result15, newSize);
+
+        for(int i = 0 ; i < newSize; i++)
+            for(int j = 0 ; j < newSize ; j++)
+                K[i][j] = result15[i][j];
+
+        // L = P1 + P5 - (P3 + P7)
+        matrixAddition(P1, P5, result16, newSize);
+        matrixAddition(P3, P7, result17, newSize);
+        matrixSubtraction(result16, result17, result18, newSize);
+        
+
+        for(int i = 0 ; i < newSize; i++)
+            for(int j = 0 ; j < newSize ; j++)
+                L[i][j] = result18[i][j];
+        
+
+
+        for (int i = 0; i < newSize; i++)
+        {
+            for (int j = 0; j < newSize; j++)
+            {
+                C[i][j] = I[i][j];
+                C[i][j + newSize] = J[i][j];
+                C[i + newSize][j] = K[i][j];
+                C[i + newSize][j + newSize] = L[i][j];
+            }
+        }
     }
-
-    return Diff;
-}
-
-void display(int * X, int n)
-{
-    int i = 0;
-    int j = 0;
-
-    for(i = 0 ; i < n ; i++)
-    {
-        for(j = 0 ;j < n; j++)
-            std::cout << *(X + i + j) << " ";
-
-        std::cout <<  std::endl;
-    }
-}
-
-int * Strassen_Multiplication(int * X, int * Y, int * Z, int  n)
-{
-    int P1[n/2][n/2];
-    int P2[n/2][n/2];
-    int P3[n/2][n/2];
-    int P4[n/2][n/2];
-    int P5[n/2][n/2];
-    int P6[n/2][n/2];
-    int P7[n/2][n/2];
 }
