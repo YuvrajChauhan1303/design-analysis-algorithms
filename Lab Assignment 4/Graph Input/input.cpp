@@ -213,19 +213,19 @@ void displayAdjacencyList()
 
 void inputGraph()
 {
-    //Variable Initialization
+    // Variable Initialization
     char label;
     int numberOfVertices;
 
     std::cout << "Enter number of Vertices: ";
     std::cin >> numberOfVertices;
 
-    for(int i = 0 ; i < numberOfVertices ; i++)
+    for (int i = 0; i < numberOfVertices; i++)
     {
         std::cout << "Enter Vertex Label: ";
         std::cin >> label;
 
-        Vertex * temp = addVertex(label);
+        Vertex *temp = addVertex(label);
         inputEdge(label);
     }
 }

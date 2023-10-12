@@ -1,13 +1,19 @@
 #include "BFS/bfs.cpp"
 
+
 int main()
 {
+    char Source;
+    char destination;
     inputGraph();
-    displayAdjacencyList();
-    displayVertexList();
-
-    displayByDistance();
-    
+    // displayAdjacencyList();
+    // displayVertexList();
+    // BFS();
+    std::cout << "Enter Source for Shortest Path: ";
+    std::cin >> Source;
+    std::cout << "Enter Destination for Shortest Path: ";
+    std::cin >> destination;
+    shortestPath(findVertex(Source), findVertex(destination));
     return 0;
 }
 

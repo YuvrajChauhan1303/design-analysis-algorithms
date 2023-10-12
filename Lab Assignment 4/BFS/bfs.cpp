@@ -13,21 +13,77 @@
 
 #include "bfs.hpp"
 
-int BFS(char label)
+void BFS(char label)
 {
     Vertex *source = findVertex(label);
     source->explored = true;
 
-    int distanceCounter = 0;
+    int level = 0;
 
     Queue q(100);
     q.enqueue(source->label);
+    std::cout << "Level " << level << " : " << std::endl
+              << label;
+    level++;
 
     // if (!q.isEmpty())
     //     std::cout << "Not Empty!\n";
 
-    source->distance = distanceCounter;
-    distanceCounter++;
+    while (!q.isEmpty())
+    {
+        char currentLabel = q.dequeue();
+        Vertex *current = findVertex(currentLabel);
+
+        std::cout << "Level " << level << " : ";
+
+        for (int i = 0; i < current->numberOfEdges; i++)
+        {
+            if (current->edge[i]->end->explored == false)
+            {
+                Vertex *neighbor = current->edge[i]->end;
+                std::cout << neighbor->label << " ";
+                neighbor->explored = true;
+                q.enqueue(neighbor->label);
+            }
+        }
+
+        level++;
+    }
+}
+
+void setDist(Vertex *v)
+{
+    Vertex *temp = vertexList;
+    while (temp != nullptr)
+    {
+        if (temp == v)
+            temp->distance = 0;
+        else
+            temp->distance = INT32_MAX;
+        temp = temp->next;
+    }
+}
+
+inline int min(int a, int b)
+{
+    return a > b ? b : a;
+}
+
+int getDistance(Vertex *current, Vertex *neighbour)
+{
+    return min(neighbour->distance, current->distance + 1);
+}
+
+void BFS_Distance(char label)
+{
+    Vertex *source = findVertex(label);
+    setDist(source);
+    source->explored = true;
+
+    // utilities::displayDistance();
+
+    Queue q(100);
+    q.enqueue(source->label);
 
     while (!q.isEmpty())
     {
@@ -40,41 +96,20 @@ int BFS(char label)
             {
                 Vertex *neighbor = current->edge[i]->end;
                 neighbor->explored = true;
-                neighbor->distance = distanceCounter;
+                neighbor->distance = getDistance(current, neighbor);
                 q.enqueue(neighbor->label);
             }
         }
-
-        if(current->numberOfEdges != 0)
-            distanceCounter++;
     }
-
-    return distanceCounter;
+    // utilities::displayDistance();
 }
 
-void displayByDistance()
+int shortestPath(Vertex *source, Vertex *destination)
 {
-    char sourceLabel;
-    std::cout << "Enter Source Vertex: ";
-    std::cin >> sourceLabel;
+    BFS_Distance(source->label);
 
-    Vertex *temp = vertexList;
+    std::cout << std::endl
+              << "Shortest Path between " << source->label << " and " << destination->label << " is : " << destination->distance << std::endl;
 
-    int distance = BFS(sourceLabel);
-
-    for (int i = 0; i < distance; i++)
-    {
-        std::cout << std::endl
-                  << "For Distance " << i << " : " << std::endl;
-
-        temp = vertexList;
-        while (temp != nullptr)
-        {
-            if (temp->distance == i)
-                std::cout << temp->label << " ";
-            temp = temp->next;
-        }
-
-        std::cout << std::endl;
-    }
+    return destination->distance;
 }
