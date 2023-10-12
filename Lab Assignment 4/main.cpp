@@ -3,8 +3,8 @@
 int main()
 {
     inputGraph();
-    // displayAdjacencyList();
-    // displayVertexList();
+    displayAdjacencyList();
+    displayVertexList();
 
     displayByDistance();
     

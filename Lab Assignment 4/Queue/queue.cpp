@@ -1,7 +1,5 @@
 #include "queue.hpp"
 
-//Function Declaration for Queue
-
 Queue::Queue(int size)
 {
     this->size = size;
@@ -10,49 +8,42 @@ Queue::Queue(int size)
     this->front = -1;
 }
 
-void Queue::enqueue(int num)
+void Queue::enqueue(char ch)
 {
-    if(isFull())
-        return;
+    if (isFull())
+    {
+        return; 
+    }
 
-    if (front == -1) 
+    if (front == -1)
     {
-        front = rear = 0;
-        arr[rear] = num;
+        front = 0;
     }
- 
-    else if (rear == size-1 && front != 0)
-    {
-        rear = 0;
-        arr[rear] = num;
-    }
- 
-    else
-        arr[++rear] = num;
+
+    rear = (rear + 1) % size;
+    arr[rear] = ch;
 }
 
 char Queue::dequeue()
 {
-    if(isEmpty())
-        return '0';
+    if (isEmpty())
+        return '\0';
 
-    char data = arr[front--];
+    char data = arr[front];
     if (front == rear)
     {
         front = -1;
         rear = -1;
     }
-    else if (front == size-1)
-        front = 0;
     else
-        front++;
- 
+        front = (front + 1) % size; 
+
     return data;
 }
 
 bool Queue::isFull()
 {
-    return (front == 0 && rear == size-1) || ((rear+1) % size == front);
+    return (front == (rear + 1) % size);
 }
 
 bool Queue::isEmpty()

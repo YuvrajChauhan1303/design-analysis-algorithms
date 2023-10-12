@@ -11,7 +11,7 @@ class Queue
 
     public:
         Queue(int size);
-        void enqueue(int num);
+        void enqueue(char ch);
         char dequeue();
         bool isFull();
         bool isEmpty();

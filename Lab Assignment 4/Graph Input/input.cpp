@@ -30,7 +30,7 @@ struct Vertex *createVertex()
 
 struct Vertex *addVertex(char label)
 {
-    if(findVertex(label) != nullptr)
+    if (findVertex(label) != nullptr)
         return findVertex(label);
 
     struct Vertex *temp = vertexList;
@@ -164,7 +164,9 @@ void displayVertexList()
         return;
     }
 
-    std::cout << std::endl << std::endl << "Vertex List:" << std::endl;
+    std::cout << std::endl
+              << std::endl
+              << "Vertex List:" << std::endl;
 
     while (temp != nullptr)
     {
@@ -173,13 +175,11 @@ void displayVertexList()
         if (temp->edge != nullptr)
         {
             std::cout << "Edges:";
+
             for (int i = 0; i < temp->numberOfEdges; i++)
-            {
                 if (temp->edge[i] != nullptr)
-                {
                     std::cout << " " << temp->edge[i]->label;
-                }
-            }
+
             std::cout << std::endl;
         }
 
@@ -197,7 +197,9 @@ void displayAdjacencyList()
         return;
     }
 
-    std::cout <<  std::endl << std::endl << "Adjacency List:" << std::endl;
+    std::cout << std::endl
+              << std::endl
+              << "Adjacency List:" << std::endl;
 
     while (temp != nullptr)
     {
@@ -211,33 +213,19 @@ void displayAdjacencyList()
 
 void inputGraph()
 {
+    //Variable Initialization
     char label;
+    int numberOfVertices;
 
-    while (true)
+    std::cout << "Enter number of Vertices: ";
+    std::cin >> numberOfVertices;
+
+    for(int i = 0 ; i < numberOfVertices ; i++)
     {
-        int choice;
-        std::cout << "Menu:\n";
-        std::cout << "1. Add a vertex\n";
-        std::cout << "2. Input edges for a vertex\n";
-        std::cout << "3. Exit\n";
-        std::cout << "Enter your choice: ";
-        std::cin >> choice;
+        std::cout << "Enter Vertex Label: ";
+        std::cin >> label;
 
-        if (choice == 1)
-        {
-            std::cout << "Enter vertex label: ";
-            std::cin >> label;
-            vertexList = addVertex(label);
-        }
-        else if (choice == 2)
-        {
-            std::cout << "Enter vertex label for which you want to input edges: ";
-            std::cin >> label;
-            vertexList = inputEdge(label);
-        }
-        else if (choice == 3)
-        {
-            return;
-        }
+        Vertex * temp = addVertex(label);
+        inputEdge(label);
     }
 }
