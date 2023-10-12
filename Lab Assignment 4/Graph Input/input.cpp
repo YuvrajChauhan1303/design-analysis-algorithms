@@ -30,13 +30,20 @@ struct Vertex *createVertex()
 
 struct Vertex *addVertex(char label)
 {
+
+    // If the Vertex Exists, return Vertex
+
     if (findVertex(label) != nullptr)
         return findVertex(label);
+
+    // Else create a newVertex
 
     struct Vertex *temp = vertexList;
 
     struct Vertex *newVertex = createVertex();
     newVertex->label = label;
+
+    // If there are no nodes in vertexList, add newVertex
 
     if (temp == nullptr)
     {
@@ -44,10 +51,13 @@ struct Vertex *addVertex(char label)
         return vertexList;
     }
 
+    // Else add in the end of List
+
     while (temp->next != nullptr)
         temp = temp->next;
 
     temp->next = newVertex;
+
     return vertexList;
 }
 
@@ -112,12 +122,17 @@ struct Vertex *inputEdge(char label)
     struct Edge *edgePointer = nullptr;
     struct Vertex *endPointer = nullptr;
 
+    // temp points to the current node
     struct Vertex *temp = vertexList;
     temp = findVertex(label);
 
     if (temp == nullptr)
-        vertexList = addVertex(label);
+    {
+        addVertex(label);
+        temp = findVertex(label);
+    }
 
+    // input number of edges for the current node
     std::cout << "Enter Number of Edges: ";
     std::cin >> numberOfEdges;
     temp->numberOfEdges = numberOfEdges;
@@ -125,9 +140,11 @@ struct Vertex *inputEdge(char label)
 
     for (i = 0; i < numberOfEdges; i++)
     {
+        // input edge label
         std::cout << "Enter Edge Label: ";
         std::cin >> edgeLabel;
 
+        // Create edge
         edgePointer = findEdge(edgeLabel);
 
         if (edgePointer == nullptr)

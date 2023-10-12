@@ -18,13 +18,8 @@ void BFS(char label)
     Vertex *source = findVertex(label);
     source->explored = true;
 
-    int level = 0;
-
     Queue q(100);
     q.enqueue(source->label);
-    std::cout << "Level " << level << " : " << std::endl
-              << label;
-    level++;
 
     // if (!q.isEmpty())
     //     std::cout << "Not Empty!\n";
@@ -33,8 +28,6 @@ void BFS(char label)
     {
         char currentLabel = q.dequeue();
         Vertex *current = findVertex(currentLabel);
-
-        std::cout << "Level " << level << " : ";
 
         for (int i = 0; i < current->numberOfEdges; i++)
         {
@@ -46,8 +39,7 @@ void BFS(char label)
                 q.enqueue(neighbor->label);
             }
         }
-
-        level++;
+        std::cout << std::endl;
     }
 }
 
@@ -112,4 +104,49 @@ int shortestPath(Vertex *source, Vertex *destination)
               << "Shortest Path between " << source->label << " and " << destination->label << " is : " << destination->distance << std::endl;
 
     return destination->distance;
+}
+
+void BFS_NoPrint(char label)
+{
+    Vertex *source = findVertex(label);
+    source->explored = true;
+
+    Queue q(100);
+    q.enqueue(source->label);
+
+    while (!q.isEmpty())
+    {
+        char currentLabel = q.dequeue();
+        Vertex *current = findVertex(currentLabel);
+
+        for (int i = 0; i < current->numberOfEdges; i++)
+        {
+            if (current->edge[i]->end->explored == false)
+            {
+                Vertex *neighbor = current->edge[i]->end;
+                neighbor->explored = true;
+                q.enqueue(neighbor->label);
+            }
+        }
+    }
+}
+
+int checkConnectivity()
+{
+    int i;
+    int groups = 0;
+    Vertex *temp = vertexList;
+
+    for (i = 0; i < utilities::numberOfVertices(vertexList); i++)
+    {
+        if (temp->explored == false)
+        {
+            BFS_NoPrint(temp->label);
+            groups++;
+        }
+        else 
+            temp = temp->next;
+    }
+
+    return groups;
 }
