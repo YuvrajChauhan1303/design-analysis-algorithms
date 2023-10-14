@@ -17,6 +17,12 @@ The study of algorithms is at the core of computer science. This repository is d
 
 Within this section, you'll discover meticulously crafted solutions to lab problems assigned during the "Design and Analysis of Algorithms" course. Each solution is accompanied by detailed explanations and, where applicable, the source code for the algorithm implementation. These solutions not only help you with your coursework but also provide valuable insights into algorithmic concepts.
 
+
+## Lab Problems Conquered
+
+- Divide and Conquer
+- Graph Algorithms : Adjacency List (Customized), Breadth First Search, Shortest Path & Connected Components.
+
 ## Algorithm Analysis
 
 Understanding how algorithms work and evaluating their efficiency is essential in the realm of algorithm design. In this segment, we present comprehensive analyses of the algorithms used in the solutions. These analyses delve into various aspects, such as time complexity, space complexity, and practical considerations. By studying these analyses, you'll gain a deeper insight into the art of algorithm design and analysis.
