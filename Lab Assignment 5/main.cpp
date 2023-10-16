@@ -1,4 +1,4 @@
-#include "depth-first-search/dfs.cpp"
+#include "functions/functions.cpp"
 
 /*
     1. Create an Array of Objects for Vertex.
@@ -72,7 +72,7 @@ int main()
 
     for (i = 0; i < numberOfVertex; i++)
     {
-        std::cout << "Vertex "<<vertexArray[i].getLabel() << " : ";
+        std::cout << "Vertex " << vertexArray[i].getLabel() << " : ";
         for (j = 0; j < vertexArray[i].getNumberOfEdges(); j++)
             std::cout << vertexArray[i].edgesArray[j].getEdgeLabel() << " ";
         std::cout << std::endl;
@@ -94,5 +94,10 @@ int main()
     std::cout << "Enter Your Source Vertex: ";
     std::cin >> source;
     DFS(source, vertexArray, numberOfVertex);
+
+    std::cout << "Enter Your Source Vertex: ";
+    std::cin >> source;
+    BFS(source, vertexArray, numberOfVertex);
+
     return 0;
 }
