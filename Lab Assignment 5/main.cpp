@@ -1,5 +1,4 @@
 #include "depth-first-search/dfs.cpp"
-#include "graph-input/graph_input.cpp"
 
 /*
     1. Create an Array of Objects for Vertex.
@@ -42,14 +41,6 @@ int main()
         vertexArray[i].addLabel(vertexLabel);
     }
 
-    std::cout << std::endl
-              << "The Vertices input by the user is: " << std::endl;
-
-    for (i = 0; i < numberOfVertex; i++)
-    {
-        std::cout << vertexArray[i].getLabel() << " ";
-    }
-
     std::cout << std::endl;
 
     for (i = 0; i < numberOfVertex; i++)
@@ -73,12 +64,22 @@ int main()
 
             // Create the same Edge for edgeList
             edgeList[k++].setEdgeData(edgeLabel, i, toVertexIndex);
-
         }
+    }
+
+    std::cout << std::endl
+              << "The Vertices input by the user is: " << std::endl;
+
+    for (i = 0; i < numberOfVertex; i++)
+    {
+        std::cout << "Vertex "<<vertexArray[i].getLabel() << " : ";
+        for (j = 0; j < vertexArray[i].getNumberOfEdges(); j++)
+            std::cout << vertexArray[i].edgesArray[j].getEdgeLabel() << " ";
+        std::cout << std::endl;
     }
     std::cout << std::endl
               << "The Edges Array created by User is: " << std::endl;
-    
+
     for (i = 0; i < totalNumberOfEdges; i++)
     {
         std::cout << "Edge Label: " << edgeList[i].getEdgeLabel() << std::endl;
@@ -86,5 +87,12 @@ int main()
         std::cout << "To Vertex: " << vertexArray[edgeList[i].getToVertex()].getLabel() << std::endl;
         std::cout << std::endl;
     }
+
+    // Variable Declaration for DFS Algorithm
+    char source;
+
+    std::cout << "Enter Your Source Vertex: ";
+    std::cin >> source;
+    DFS(source, vertexArray, numberOfVertex);
     return 0;
 }

@@ -1,4 +1,4 @@
-#include "../graph-input/graph_input.hpp"
+#include "../graph-input/graph_input.cpp"
 
 /*
     DFS(G,s)
@@ -7,3 +7,5 @@
         - if v is unexplored
         - DFS(G,v)
 */
+
+void DFS(char source, vertex vertexArray[], int numberOfVertex);

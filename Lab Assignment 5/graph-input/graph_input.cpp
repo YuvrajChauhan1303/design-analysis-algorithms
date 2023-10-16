@@ -15,6 +15,7 @@ public:
     void createEdgesArray(int numberOfEdges);
     void updateExplore();
     bool checkExplore();
+    int getNumberOfEdges();
 };
 
 class edge
@@ -60,17 +61,6 @@ void vertex::createEdgesArray(int numberOfEdges = 0)
     this->edgesArray = new edge[numberOfEdges];
 }
 
-int findVertex(char label, vertex vertexArray[], int numberOfVertex)
-{
-    int i;
-
-    for (i = 0; i < numberOfVertex; i++)
-        if (vertexArray[i].getLabel() == label)
-            break;
-
-    return i;
-}
-
 void vertex::updateExplore()
 {
     this->isExplored = true;
@@ -79,6 +69,11 @@ void vertex::updateExplore()
 bool vertex::checkExplore()
 {
     return this->isExplored;
+}
+
+int vertex::getNumberOfEdges()
+{
+    return this->numberOfEdges;
 }
 
 // Function Declarations for Edge Class:
@@ -108,4 +103,16 @@ int edge::getFromVertex()
 int edge::getToVertex()
 {
     return this->toVertexIndex;
+}
+
+// Other Function Declarations
+int findVertex(char label, vertex vertexArray[], int numberOfVertex)
+{
+    int i;
+
+    for (i = 0; i < numberOfVertex; i++)
+        if (vertexArray[i].getLabel() == label)
+            break;
+
+    return i;
 }
