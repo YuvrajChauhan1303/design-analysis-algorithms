@@ -12,52 +12,79 @@
         3.5 input ending vertex for the edge, and update both from and to vertex for the edge in array of object for edge.
 */
 
-//Driver Code
+// Driver Code
 int main()
 {
-    //Variable Declaration:
+    // Variable Declaration:
     int numberOfVertex;
-    int i, j; //Loop Variables
+    int i, j, k = 0; // Loop Variables
     char vertexLabel;
     int numberOfEdges;
+    int totalNumberOfEdges;
     std::string edgeLabel;
     char toVertexLabel;
-    vertex * toVertex;
+    int toVertexIndex;
 
-    std::cout << "Enter number of Vertices: " ;
+    std::cout << "Enter number of Vertices: ";
     std::cin >> numberOfVertex;
 
-    vertex vertexArray[numberOfVertex];
-    edge * edgeList;
+    std::cout << "Enter Total Edges in the graph: ";
+    std::cin >> totalNumberOfEdges;
 
-    for(i = 0 ; i < numberOfVertex ; i++)
+    // Create Array of Objects
+    vertex vertexArray[numberOfVertex];
+    edge edgeList[totalNumberOfEdges];
+
+    for (i = 0; i < numberOfVertex; i++)
     {
         std::cout << "Enter Vertex Label: ";
         std::cin >> vertexLabel;
         vertexArray[i].addLabel(vertexLabel);
     }
 
-    for(i = 0 ; i < numberOfVertex ; i++)
+    std::cout << std::endl
+              << "The Vertices input by the user is: " << std::endl;
+
+    for (i = 0; i < numberOfVertex; i++)
+    {
+        std::cout << vertexArray[i].getLabel() << " ";
+    }
+
+    std::cout << std::endl;
+
+    for (i = 0; i < numberOfVertex; i++)
     {
         std::cout << "Enter Number of Edges for Vertex " << vertexArray[i].getLabel() << " : ";
         std::cin >> numberOfEdges;
         vertexArray[i].createEdgesArray(numberOfEdges);
-        for(j = 0 ; j < numberOfEdges ; j++)
+
+        for (j = 0; j < numberOfEdges; j++)
         {
-            //Create Edge for Array of Edges in a Vertex object
+            // Create Edge for Array of Edges in a Vertex object
             std::cout << "Enter Edge Label: ";
             std::cin >> edgeLabel;
 
             std::cout << "Enter Ending Vertex: ";
             std::cin >> toVertexLabel;
 
-            toVertex = findVertex(toVertexLabel, vertexArray, numberOfVertex);
+            toVertexIndex = findVertex(toVertexLabel, vertexArray, numberOfVertex);
 
-            vertexArray[i].edgesArray[j].setEdgeData( edgeLabel , &vertexArray[i], toVertex);
+            vertexArray[i].edgesArray[j].setEdgeData(edgeLabel, i, toVertexIndex);
 
-            //Add the same edge to List of Edges
-            edgeList->addNext(edgeList, edgeLabel, &vertexArray[i], toVertex);
+            // Create the same Edge for edgeList
+            edgeList[k++].setEdgeData(edgeLabel, i, toVertexIndex);
+
         }
+    }
+    std::cout << std::endl
+              << "The Edges Array created by User is: " << std::endl;
+    
+    for (i = 0; i < totalNumberOfEdges; i++)
+    {
+        std::cout << "Edge Label: " << edgeList[i].getEdgeLabel() << std::endl;
+        std::cout << "From Vertex: " << vertexArray[edgeList[i].getFromVertex()].getLabel() << std::endl;
+        std::cout << "To Vertex: " << vertexArray[edgeList[i].getToVertex()].getLabel() << std::endl;
+        std::cout << std::endl;
     }
     return 0;
 }

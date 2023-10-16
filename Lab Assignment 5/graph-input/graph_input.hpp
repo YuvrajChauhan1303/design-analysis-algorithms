@@ -16,3 +16,5 @@ class edge;
         3.4 create an object of class edge. add the same edge to the array of objects for edges
         3.5 input ending vertex for the edge, and update both from and to vertex for the edge in array of object for edge.
 */
+
+int findVertex(char label, vertex vertexArray[], int numberOfVertex);

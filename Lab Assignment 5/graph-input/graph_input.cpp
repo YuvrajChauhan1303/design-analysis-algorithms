@@ -14,21 +14,22 @@ public:
     char getLabel();
     void createEdgesArray(int numberOfEdges);
     void updateExplore();
-    bool checkExplore(); 
+    bool checkExplore();
 };
 
 class edge
 {
 private:
     std::string label;
-    vertex *fromVertex;
-    vertex *toVertex;
+    int fromVertexIndex;
+    int toVertexIndex;
 
 public:
-    edge *next;
     edge();
-    void setEdgeData(std::string edgeLabel, vertex *fromVertex, vertex *toVertex);
-    void addNext(edge *edgeList, std::string edgeLabel, vertex *fromVertex, vertex *toVertex);
+    void setEdgeData(std::string label, int fromVertex, int toVertex);
+    std::string getEdgeLabel();
+    int getFromVertex();
+    int getToVertex();
 };
 
 // Function Declarations for Vertex Class:
@@ -59,11 +60,15 @@ void vertex::createEdgesArray(int numberOfEdges = 0)
     this->edgesArray = new edge[numberOfEdges];
 }
 
-vertex *findVertex(char label, vertex vertexArray[], int numberOfVertex)
+int findVertex(char label, vertex vertexArray[], int numberOfVertex)
 {
-    for (int i = 0; i < numberOfVertex; i++)
+    int i;
+
+    for (i = 0; i < numberOfVertex; i++)
         if (vertexArray[i].getLabel() == label)
-            return &vertexArray[i];
+            break;
+
+    return i;
 }
 
 void vertex::updateExplore()
@@ -76,35 +81,31 @@ bool vertex::checkExplore()
     return this->isExplored;
 }
 
-
 // Function Declarations for Edge Class:
 
 edge::edge()
 {
     this->label = "";
-    this->fromVertex = nullptr;
-    this->toVertex = nullptr;
+    this->fromVertexIndex = 0;
+    this->toVertexIndex = 0;
+}
+void edge::setEdgeData(std::string label, int fromVertex, int toVertex)
+{
+    this->label = label;
+    this->fromVertexIndex = fromVertex;
+    this->toVertexIndex = toVertex;
 }
 
-void edge::setEdgeData(std::string edgeLabel, vertex *fromVertex, vertex *toVertex)
+std::string edge::getEdgeLabel()
 {
-    this->label = edgeLabel;
-    this->fromVertex = fromVertex;
-    this->toVertex = toVertex;
+    return this->label;
 }
 
-void edge::addNext(edge *edgeList, std::string edgeLabel, vertex *fromVertex, vertex *toVertex)
+int edge::getFromVertex()
 {
-    edge *temp = edgeList;
-
-    while (temp->next != nullptr)
-        temp = temp->next;
-
-    edge *newEdge = new edge;
-
-    newEdge->next = nullptr;
-
-    newEdge->setEdgeData(edgeLabel, fromVertex, toVertex);
-
-    temp->next = newEdge;
+    return this->fromVertexIndex;
+}
+int edge::getToVertex()
+{
+    return this->toVertexIndex;
 }
