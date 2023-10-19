@@ -1,4 +1,10 @@
 #include "functions/functions.cpp"
+#include "functions/vertex.cpp"
+#include "functions/edge.cpp"
+#include "functions/BFS.cpp"
+#include "functions/DFS.cpp"
+#include "functions/cycleDFS.cpp"
+#include "functions/TopologicalSort.cpp"
 
 /*
     1. Create an Array of Objects for Vertex.
@@ -99,10 +105,13 @@ int main()
     // std::cin >> source;
     // BFS(source, vertexArray, numberOfVertex);
 
-    bool cycle = isCycle(vertexArray, numberOfVertex);
+    // bool cycle = isCycle(vertexArray, numberOfVertex);
 
-    if(cycle == true)
-        std::cout << "There Exists a Cycle in the Graph" << std::endl;
-    else std::cout << "There DOES NOT Exist a Cycle in the Graph" << std::endl;
+    // if(cycle == true)
+    //     std::cout << "There Exists a Cycle in the Graph" << std::endl;
+    // else std::cout << "There DOES NOT Exist a Cycle in the Graph" << std::endl;
+
+    TopologicalSort(vertexArray, numberOfVertex);
+
     return 0;
 }

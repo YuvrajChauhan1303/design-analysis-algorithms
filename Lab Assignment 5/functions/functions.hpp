@@ -1,5 +1,9 @@
+#ifndef FUNCTION
+#define FUNCTION
+
 #include <iostream>
 #include <string>
+static int curLabel;
 
 // Class Declarations
 
@@ -7,20 +11,7 @@ class vertex;
 class edge;
 class Queue;
 
-/*
-    Algorithm to input Graph
-        1. Create an Array of Objects for Vertex.
-        2. Create an Array of Objects for edges.
-        3. Ask data for a vertex
-            3.1 input Vertex Label
-            3.2 input number of Edges for the vertex
-            3.3 initialize edgesArray
-            3.4 create an object of class edge. add the same edge to the array of objects for edges
-            3.5 input ending vertex for the edge, and update both from and to vertex for the edge in array of object for edge.
-*/
-
 //Class Definitions
-
 class vertex
 {
 private:
@@ -28,6 +19,7 @@ private:
     int numberOfEdges;
     bool isExplored;
     bool onStack;
+    int topologicalSortIndex;
 
 public:
     edge *edgesArray;
@@ -41,6 +33,9 @@ public:
     void trueOnStack();
     void falseOnStack();
     bool getOnStack();
+    void markAsUnexplored();
+    void setTopologicalSortIndex(int n);
+    int getTopologicalSortIndex();
 };
 
 class edge
@@ -60,29 +55,40 @@ public:
 
 class Queue
 {
-    private:
-        int size;
-        int front;
-        int rear;
-        char * arr;
+private:
+    int size;
+    int front;
+    int rear;
+    char *arr;
 
-    public:
-        Queue(int size);
-        void enqueue(char ch);
-        char dequeue();
-        bool isFull();
-        bool isEmpty();
+public:
+    Queue(int size);
+    void enqueue(char ch);
+    char dequeue();
+    bool isFull();
+    bool isEmpty();
 };
 
-//Function Declarations
+/*
+    Algorithm to input Graph
+        1. Create an Array of Objects for Vertex.
+        2. Create an Array of Objects for edges.
+        3. Ask data for a vertex
+            3.1 input Vertex Label
+            3.2 input number of Edges for the vertex
+            3.3 initialize edgesArray
+            3.4 create an object of class edge. add the same edge to the array of objects for edges
+            3.5 input ending vertex for the edge, and update both from and to vertex for the edge in array of object for edge.
+*/
 
-int findVertex(char label, vertex vertexArray[], int numberOfVertex);
+// Function Declarations
+
 void DFS(char source, vertex vertexArray[], int numberOfVertex);
 
 /*
     DFS(G,s)
     1. mark s as explored
-    2. for every edge(s,v) 
+    2. for every edge(s,v)
         2.1 if v is 'unexplored'
             2.1.1 DFS(G,v)
 */
@@ -109,7 +115,7 @@ bool cycleDFS(char source, vertex vertexArray[], int numberOfVertex);
         1.1 return true
     2. mark s as 'onstack'
     3. mark s as explored
-    4. for every edge(s,v) 
+    4. for every edge(s,v)
         4.1 if v is 'unexplored'
             4.1.1 DFS(G,v)
     5. mark s as 'not on stack'
@@ -122,3 +128,26 @@ bool isCycle(vertex vertexArray[], int numberOfVertex);
     1. for i = 0 to n
         1.1 cycleDFS(G,i);
 */
+
+void TopologicalSort(vertex vertexArray[], int numberOfVertex);
+/*
+    TopologicalSort(G, v)
+    1. mark all vertices as unexplored
+    2. curLabel = |V|
+        2.1 if v is unexplored then
+        2.2 DFS_Topo(G,v)
+*/
+void DFS_Topo(char source, vertex vertexArray[], int numberOfVertex);
+
+/*
+    DFS_Topo
+    1. mark s as explored
+    2. for each edge (s, v) in s’s outgoing adjacency list do
+    3. if v is unexplored then DFS-Topo (G, v)
+        f(s) = curLabel
+    4. curLabel = curLabel -1
+*/
+
+void printTopologicalySortedGraph(vertex vertexArray[], int numberOfVertex);
+
+#endif // FUNCTION
