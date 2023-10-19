@@ -91,13 +91,18 @@ int main()
     // Variable Declaration for DFS Algorithm
     char source;
 
-    std::cout << "Enter Your Source Vertex: ";
-    std::cin >> source;
-    DFS(source, vertexArray, numberOfVertex);
+    // std::cout << "Enter Your Source Vertex: ";
+    // std::cin >> source;
+    // DFS(source, vertexArray, numberOfVertex);
 
-    std::cout << "Enter Your Source Vertex: ";
-    std::cin >> source;
-    BFS(source, vertexArray, numberOfVertex);
+    // std::cout << "Enter Your Source Vertex: ";
+    // std::cin >> source;
+    // BFS(source, vertexArray, numberOfVertex);
 
+    bool cycle = isCycle(vertexArray, numberOfVertex);
+
+    if(cycle == true)
+        std::cout << "There Exists a Cycle in the Graph" << std::endl;
+    else std::cout << "There DOES NOT Exist a Cycle in the Graph" << std::endl;
     return 0;
 }

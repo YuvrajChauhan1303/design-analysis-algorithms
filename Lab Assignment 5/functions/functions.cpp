@@ -8,6 +8,7 @@ vertex::vertex()
     this->numberOfEdges = 0;
     this->edgesArray = nullptr;
     this->isExplored = false;
+    this->onStack = false;
 }
 
 void vertex::addLabel(char label)
@@ -41,6 +42,19 @@ bool vertex::checkExplore()
 int vertex::getNumberOfEdges()
 {
     return this->numberOfEdges;
+}
+
+void vertex::trueOnStack()
+{
+    this->onStack = true;
+}
+void vertex::falseOnStack()
+{
+    this->onStack = false;
+}
+bool vertex::getOnStack()
+{
+    return this->onStack;
 }
 
 // Function Declarations for Edge Class:
@@ -161,8 +175,6 @@ void DFS(char source, vertex vertexArray[], int numberOfVertex)
 
 // Function Definitions for BFS
 
-// Function Definitions for BFS
-
 void BFS(char sourceLabel, vertex vertexArray[], int numberOfVertex)
 {
     int sourceIndex = findVertex(sourceLabel, vertexArray, numberOfVertex);
@@ -205,6 +217,62 @@ void BFS(char sourceLabel, vertex vertexArray[], int numberOfVertex)
         }
     }
     std::cout << std::endl;
+}
+
+// Check if there exists a cycle in graph
+
+bool cycleDFS(char source, vertex vertexArray[], int numberOfVertex)
+{
+    int i;
+    int j;
+    int toIndex;
+    char toLabel;
+    bool cycle = false; // Initialize to false
+
+    int sourceIndex = findVertex(source, vertexArray, numberOfVertex);
+
+    vertexArray[sourceIndex].trueOnStack();
+    vertexArray[sourceIndex].updateExplore();
+
+    for (j = 0; j < vertexArray[sourceIndex].getNumberOfEdges(); j++)
+    {
+        toIndex = vertexArray[sourceIndex].edgesArray[j].getToVertex();
+        toLabel = vertexArray[toIndex].getLabel();
+
+        if (vertexArray[toIndex].checkExplore() && vertexArray[toIndex].getOnStack())
+        {
+            return true; // Return immediately if a cycle is found
+        }
+        else if (!vertexArray[toIndex].checkExplore())
+        {
+            cycle = cycleDFS(toLabel, vertexArray, numberOfVertex);
+            if (cycle) // Check if a cycle was found in the recursive call
+            {
+                return true;
+            }
+        }
+    }
+
+    vertexArray[sourceIndex].falseOnStack(); 
+
+    return cycle;
+}
+
+bool isCycle(vertex vertexArray[], int numberOfVertex)
+{
+    int i;
+
+    for (i = 0; i < numberOfVertex; i++)
+    {
+        bool cycle = cycleDFS(vertexArray[i].getLabel(), vertexArray, numberOfVertex);
+
+        if (cycle)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 

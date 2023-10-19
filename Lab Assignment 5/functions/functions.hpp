@@ -6,6 +6,7 @@
 class vertex;
 class edge;
 class Queue;
+
 /*
     Algorithm to input Graph
         1. Create an Array of Objects for Vertex.
@@ -26,6 +27,7 @@ private:
     char label;
     int numberOfEdges;
     bool isExplored;
+    bool onStack;
 
 public:
     edge *edgesArray;
@@ -36,6 +38,9 @@ public:
     void updateExplore();
     bool checkExplore();
     int getNumberOfEdges();
+    void trueOnStack();
+    void falseOnStack();
+    bool getOnStack();
 };
 
 class edge
@@ -73,4 +78,47 @@ class Queue
 
 int findVertex(char label, vertex vertexArray[], int numberOfVertex);
 void DFS(char source, vertex vertexArray[], int numberOfVertex);
+
+/*
+    DFS(G,s)
+    1. mark s as explored
+    2. for every edge(s,v) 
+        2.1 if v is 'unexplored'
+            2.1.1 DFS(G,v)
+*/
+
 void BFS(char sourceLabel, vertex vertexArray[], int numberOfVertex);
+
+/*
+    BFS(G,s)
+        - Mark s as "explored"
+        - Q <- Queue initialized by s
+        - while Q != NULL
+            - remove from front of Q the vertex v
+            - for each edge (v, w)
+                - if W is "unexplored"
+                    - mark w as explored
+                    - Add w to Q
+*/
+
+bool cycleDFS(char source, vertex vertexArray[], int numberOfVertex);
+
+/*
+    cycleDFS(G,s)
+    1. if s is on stack
+        1.1 return true
+    2. mark s as 'onstack'
+    3. mark s as explored
+    4. for every edge(s,v) 
+        4.1 if v is 'unexplored'
+            4.1.1 DFS(G,v)
+    5. mark s as 'not on stack'
+*/
+
+bool isCycle(vertex vertexArray[], int numberOfVertex);
+
+/*
+    isCycle()
+    1. for i = 0 to n
+        1.1 cycleDFS(G,i);
+*/
