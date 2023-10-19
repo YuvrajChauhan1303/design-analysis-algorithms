@@ -1,56 +1,46 @@
-#ifndef BFS_H
-#define BFS_H
+#ifndef BFS_CPP
+#define BFS_CPP
 
-#include "functions.cpp"
-#include "queue.cpp"
+#include "header.hpp"
 #include "vertex.cpp"
-#include "edge.cpp"
+#include "queue.cpp"
 
-void BFS(char sourceLabel, vertex vertexArray[], int numberOfVertex)
+void graph::BFS(char source)
 {
-    int sourceIndex = findVertex(sourceLabel, vertexArray, numberOfVertex);
-
-    if (sourceIndex == -1)
+    vertex *sourceVertex = findVertex(source);
+    if (!sourceVertex)
     {
-        std::cout << "Source vertex not found." << std::endl;
+        std::cout << "Source vertex not found in the graph." << std::endl;
         return;
     }
 
-    vertex sourceVertex = vertexArray[sourceIndex];
-    sourceVertex.updateExplore();
+    int queueSize = getNumberOfVertex();
+    queue q1(queueSize);
 
-    Queue vertexQueue(numberOfVertex);
-    vertexQueue.enqueue(sourceVertex.getLabel());
+    sourceVertex->updateExplore(true);
 
-    while (!vertexQueue.isEmpty())
+    std::cout << "BFS traversal from source " << source << ": ";
+    std::cout << source << " -> ";
+
+    q1.enqueue(sourceVertex);
+
+    while (!q1.isEmpty())
     {
-        char leadVertexLabel = vertexQueue.dequeue();
+        vertex *temp = q1.dequeue();
 
-        int leadVertexIndex = findVertex(leadVertexLabel, vertexArray, numberOfVertex);
-        vertex leadVertex = vertexArray[leadVertexIndex];
-
-        for (int i = 0; i < leadVertex.getNumberOfEdges(); i++)
+        for (int i = 0; i < temp->getNumberOfEdges(); i++)
         {
-            int toVertexIndex = leadVertex.edgesArray[i].getToVertex();
-
-            if (!vertexArray[toVertexIndex].checkExplore())
+            vertex *toVertex = temp->edgesArray[i].getToVertex();
+            if (!toVertex->checkExplore())
             {
-                vertexArray[toVertexIndex].updateExplore();
-                vertexQueue.enqueue(vertexArray[toVertexIndex].getLabel());
+                toVertex->updateExplore(true);
+                std::cout << toVertex->getLabel() << " -> ";
+                q1.enqueue(toVertex);
             }
         }
     }
 
-    // Print the visited nodes after BFS traversal
-    std::cout << "BFS traversal starting from vertex " << sourceLabel << " is: ";
-    for (int i = 0; i < numberOfVertex; i++)
-    {
-        if (vertexArray[i].checkExplore())
-        {
-            std::cout << vertexArray[i].getLabel() << " ";
-        }
-    }
     std::cout << std::endl;
 }
 
-#endif // BFS_H
+#endif

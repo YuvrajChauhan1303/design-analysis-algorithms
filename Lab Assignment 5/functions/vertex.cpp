@@ -1,23 +1,60 @@
 #ifndef VERTEX
-#define VERTEX  
+#define VERTEX
 
-#include "functions.hpp"
+#include "graph.cpp"
+#include "edge.cpp"
 
-vertex::vertex()
+class vertex
 {
-    this->label = ' ';
-    this->numberOfEdges = 0;
-    this->edgesArray = nullptr;
-    this->isExplored = false;
-    this->onStack = false;
-    this->topologicalSortIndex = 0;
-}
+private:
+    char label;
+    int numberOfEdges;
+    bool isExplored;
 
-void vertex::addLabel(char label)
+public:
+    edge *edgesArray;
+    vertex(char label, int numberOfEdges);
+    void inputEdges(graph *g);
+    void setEdges(int n);
+    char getLabel();
+    int getNumberOfEdges();
+    bool checkExplore();
+    void updateExplore(bool value);
+};
+
+vertex::vertex(char label, int numberOfEdges)
 {
     this->label = label;
-    this->numberOfEdges = 0;
-    this->edgesArray = nullptr;
+    this->numberOfEdges = numberOfEdges;
+    this->edgesArray = new edge[numberOfEdges];
+    this->isExplored = false;
+}
+
+void vertex::inputEdges(graph *g)
+{
+    int i;
+    std::string edgeLabel;
+    char fromLabel = this->label;
+    char toLabel;
+
+    std::cout << "Enter Edge Label: ";
+    std::cin >> edgeLabel;
+
+    std::cout << "Enter To Label: ";
+    std::cin >> toLabel;
+
+    vertex *from = g->findVertex(fromLabel);
+    vertex *to = g->findVertex(toLabel);
+
+    for (i = 0; i < this->numberOfEdges; i++)
+    {
+        this->edgesArray[i].setData(edgeLabel, from, to);
+    }
+}
+
+void vertex::setEdges(int n)
+{
+    this->numberOfEdges = n;
 }
 
 char vertex::getLabel()
@@ -25,15 +62,9 @@ char vertex::getLabel()
     return this->label;
 }
 
-void vertex::createEdgesArray(int numberOfEdges = 0)
+int vertex::getNumberOfEdges()
 {
-    this->numberOfEdges = numberOfEdges;
-    this->edgesArray = new edge[numberOfEdges];
-}
-
-void vertex::updateExplore()
-{
-    this->isExplored = true;
+    return this->numberOfEdges;
 }
 
 bool vertex::checkExplore()
@@ -41,37 +72,9 @@ bool vertex::checkExplore()
     return this->isExplored;
 }
 
-int vertex::getNumberOfEdges()
+void vertex::updateExplore(bool value)
 {
-    return this->numberOfEdges;
-}
-
-void vertex::trueOnStack()
-{
-    this->onStack = true;
-}
-void vertex::falseOnStack()
-{
-    this->onStack = false;
-}
-bool vertex::getOnStack()
-{
-    return this->onStack;
-}
-
-void vertex::markAsUnexplored()
-{
-    this->isExplored = false;
-}
-
-void vertex::setTopologicalSortIndex(int n)
-{
-    this->topologicalSortIndex = n;
-}
-
-int vertex::getTopologicalSortIndex()
-{
-    return this->topologicalSortIndex;
+    this->isExplored = value;
 }
 
 #endif // VERTEX

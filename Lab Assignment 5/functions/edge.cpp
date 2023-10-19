@@ -1,34 +1,46 @@
 #ifndef EDGE
 #define EDGE
 
-#include "functions.hpp"
+#include "header.hpp"
 
+class edge
+{
+private:
+    std::string label;
+    vertex *fromVertex;
+    vertex *toVertex;
+
+public:
+    edge();
+    edge(const edge &other);
+    void setData(std::string label, vertex *fromVertex, vertex *toVertex);
+    vertex * getToVertex();
+};
 
 edge::edge()
 {
-    this->label = "";
-    this->fromVertexIndex = 0;
-    this->toVertexIndex = 0;
+    this->label = " ";
+    this->fromVertex = nullptr;
+    this->toVertex = nullptr;
 }
-void edge::setEdgeData(std::string label, int fromVertex, int toVertex)
+
+edge::edge(const edge& other) {
+    this->label = other.label;
+    this->fromVertex = other.fromVertex;
+    this->toVertex = other.toVertex;
+}
+
+
+void edge::setData(std::string label, vertex *fromVertex, vertex *toVertex)
 {
     this->label = label;
-    this->fromVertexIndex = fromVertex;
-    this->toVertexIndex = toVertex;
+    this->fromVertex = fromVertex;
+    this->toVertex = toVertex;
 }
 
-std::string edge::getEdgeLabel()
+vertex * edge::getToVertex()
 {
-    return this->label;
+    return this->toVertex;
 }
 
-int edge::getFromVertex()
-{
-    return this->fromVertexIndex;
-}
-int edge::getToVertex()
-{
-    return this->toVertexIndex;
-}
-
-#endif // EDGE
+#endif

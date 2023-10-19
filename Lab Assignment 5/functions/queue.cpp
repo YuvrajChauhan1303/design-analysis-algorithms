@@ -1,52 +1,63 @@
-#include "functions.hpp"
+#ifndef QUEUE
+#define QUEUE
 
-Queue::Queue(int size)
+#include "header.hpp"
+
+class queue
 {
-    this->size = size;
-    this->arr = new char[size];
-    this->rear = -1;
-    this->front = -1;
+private:
+    vertex **data;
+    int front;
+    int rear;
+    int size;
+
+public:
+    queue(int maxSize);
+    bool isEmpty() const;
+    bool isFull() const;
+    void enqueue(vertex *value);
+    vertex *dequeue();
+};
+
+queue::queue(int maxSize)
+{
+    size = maxSize + 1;
+    data = new vertex *[size];
+    front = 0;
+    rear = 0;
 }
 
-void Queue::enqueue(char ch)
+bool queue::isEmpty() const
+{
+    return front == rear;
+}
+
+bool queue::isFull() const
+{
+    return (rear + 1) % size == front;
+}
+
+void queue::enqueue(vertex *value)
 {
     if (isFull())
     {
+        std::cout << "queue is full. Cannot enqueue." << std::endl;
         return;
     }
-
-    if (front == -1)
-    {
-        front = 0;
-    }
-
+    data[rear] = value;
     rear = (rear + 1) % size;
-    arr[rear] = ch;
 }
 
-char Queue::dequeue()
+vertex *queue::dequeue()
 {
     if (isEmpty())
-        return '\0';
-
-    char data = arr[front];
-    if (front == rear)
     {
-        front = -1;
-        rear = -1;
+        std::cout << "queue is empty. Cannot dequeue." << std::endl;
+        return nullptr;
     }
-    else
-        front = (front + 1) % size;
-
-    return data;
+    vertex *value = data[front];
+    front = (front + 1) % size;
+    return value;
 }
 
-bool Queue::isFull()
-{
-    return (front == (rear + 1) % size);
-}
-
-bool Queue::isEmpty()
-{
-    return (front == -1);
-}
+#endif // QUEUE
