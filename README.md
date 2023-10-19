@@ -21,7 +21,18 @@ Within this section, you'll discover meticulously crafted solutions to lab probl
 ## Lab Problems Conquered
 
 - Divide and Conquer
-- Graph Algorithms : Adjacency List (Customized), Breadth First Search, Shortest Path & Connected Components.
+    - Merge Subroutine based problems
+    - Partition Subroutine based problems
+       
+- Graph Algorithms :
+    - Adjacency List (Customized)
+    - Struct Implementation of Graph
+    - Class Implementation of Graph
+    - Breadth First Search
+    - Shortest Path
+    - Connected Components
+    - Depth First Search
+    - Detection of Cycle
 
 ## Algorithm Analysis
 
