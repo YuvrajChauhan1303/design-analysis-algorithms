@@ -3,6 +3,7 @@
 #include "functions/BFS.cpp"
 #include "functions/DFS.cpp"
 #include "functions/graphutils.cpp"
+#include "functions/checkCycle.cpp"
 
 #define nl std::cout<<std::endl 
 
@@ -37,9 +38,16 @@ int main()
     g1->resetExplored();
     nl;
     nl;
-    
+
     g1->DFS(sourceVertex);
     g1->resetExplored();
+
+    nl;
+    nl;
+
+    bool isCycle = g1->checkCycle();
+
+    isCycle ? std::cout << "Is a Cycle" : std::cout << "Is NOT a Cycle"; nl; 
 
     return 0;
 }

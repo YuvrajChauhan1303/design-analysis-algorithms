@@ -32,6 +32,8 @@ public:
     // Graph Algorithms
     void BFS(vertex *source);
     void DFS(vertex *source);
+    bool checkCycle();
+    bool DFS_Cycle(vertex *source);
 };
 
 class vertex
@@ -40,6 +42,7 @@ private:
     char label;
     int numberOfEdges;
     bool isExplored;
+    bool onStack;
 
 public:
     edge *edgesArray;
@@ -52,6 +55,9 @@ public:
     int getNumberOfEdges();
     bool checkExplore();
     void updateExplore(bool value);
+    void trueOnStack();
+    void falseOnStack();
+    bool checkOnStack();
 };
 
 #endif // HEADER_H

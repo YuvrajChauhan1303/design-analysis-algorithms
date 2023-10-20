@@ -7,12 +7,14 @@
 vertex::vertex()
 {
     this->isExplored = false;
+    this->onStack = false;
 }
 
 vertex::vertex(char label)
 {
     this->label = label;
     this->isExplored = false;
+    this->onStack = false;
 }
 
 void vertex::inputEdges(graph *g)
@@ -66,6 +68,19 @@ void vertex::updateExplore(bool value)
 void vertex::setLabel(char label)
 {   
     this->label = label;
+}
+
+void vertex::trueOnStack()
+{
+    this->onStack = true;
+}
+void vertex::falseOnStack()
+{
+    this->onStack = false;
+}
+bool vertex::checkOnStack()
+{
+    return this->onStack;   
 }
 
 #endif // VERTEX
