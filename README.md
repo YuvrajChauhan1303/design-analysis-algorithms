@@ -6,6 +6,8 @@ Welcome to the "Design and Analysis of Algorithms" repository! This repository s
 
 - [Introduction](#introduction)
 - [Lab Problem Solutions](#lab-problem-solutions)
+- [Lab Problems Conquered](#lab-problems-conquered)
+- [Source Material](#source-material)
 - [Algorithm Analysis](#algorithm-analysis)
 - [Getting Started](#getting-started)
 
@@ -33,6 +35,16 @@ Within this section, you'll discover meticulously crafted solutions to lab probl
     - Connected Components
     - Depth First Search
     - Detection of Cycle
+    - Topological Sort
+    - Classification of Edges into Forward, Backward, Tree and Cross
+    - Diameter of a Graph
+    - Singly Connected Graph (Thomas H. Cormen)
+
+ ## Source Material
+ - Introduction to Algorithms, 4th Edition by Thomas H. Cormen
+ - Algorithms Illuminated, Vol 1-4, by Tim Roughgarden
+ - Design of Algorithms by Anany Levitin.
+     
 
 ## Algorithm Analysis
 
