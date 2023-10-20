@@ -66,7 +66,7 @@ void vertex::updateExplore(bool value)
 }
 
 void vertex::setLabel(char label)
-{   
+{
     this->label = label;
 }
 
@@ -80,7 +80,16 @@ void vertex::falseOnStack()
 }
 bool vertex::checkOnStack()
 {
-    return this->onStack;   
+    return this->onStack;
+}
+
+void vertex::setTopoOrder(int n)
+{
+    this->topoOrder = n;
+}
+int vertex::getTopoOrder()
+{
+    return this->topoOrder;
 }
 
 #endif // VERTEX

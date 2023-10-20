@@ -34,6 +34,8 @@ public:
     void DFS(vertex *source);
     bool checkCycle();
     bool DFS_Cycle(vertex *source);
+    void TopoSort();
+    void DFSTopo(vertex *source, stack * s);
 };
 
 class vertex
@@ -43,6 +45,7 @@ private:
     int numberOfEdges;
     bool isExplored;
     bool onStack;
+    int topoOrder;
 
 public:
     edge *edgesArray;
@@ -58,6 +61,8 @@ public:
     void trueOnStack();
     void falseOnStack();
     bool checkOnStack();
+    void setTopoOrder(int n);
+    int getTopoOrder();
 };
 
 #endif // HEADER_H

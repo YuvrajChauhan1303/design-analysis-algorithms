@@ -4,6 +4,7 @@
 #include "functions/DFS.cpp"
 #include "functions/graphutils.cpp"
 #include "functions/checkCycle.cpp"
+#include "functions/DFSTopo.cpp"
 
 #define nl std::cout<<std::endl 
 
@@ -48,6 +49,8 @@ int main()
     bool isCycle = g1->checkCycle();
 
     isCycle ? std::cout << "Is a Cycle" : std::cout << "Is NOT a Cycle"; nl; 
+    g1->resetExplored();
+    g1->TopoSort();
 
     return 0;
 }
