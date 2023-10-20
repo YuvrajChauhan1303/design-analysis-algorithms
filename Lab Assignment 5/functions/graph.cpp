@@ -46,13 +46,21 @@ void graph::inputGraph()
         std::cout << "Enter Vertex Label: ";
         std::cin >> vertexLabel;
 
-        this->vertexArray[i].setLabel(vertexLabel);
+        vertex *existingVertex = findVertex(vertexLabel);
+
+        if (existingVertex != nullptr)
+        {
+            this->vertexArray[i] = *existingVertex;
+        }
+        else
+        {
+            this->vertexArray[i].setLabel(vertexLabel);
+        }
     }
 
     for (i = 0; i < this->getNumberOfVertex(); i++)
     {
         std::cout << "Enter Number of Edges for Vertex " << this->vertexArray[i].getLabel() << " : ";
-
         std::cin >> edges;
         this->vertexArray[i].setEdges(edges);
     }

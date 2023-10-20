@@ -23,23 +23,35 @@ vertex::vertex(char label)
 
 void vertex::inputEdges(graph *g)
 {
-    int i;
     std::string edgeLabel;
     char fromLabel = this->label;
     char toLabel;
 
-    std::cout << "Enter Edge Label: ";
-    std::cin >> edgeLabel;
-
-    std::cout << "Enter To Label: ";
-    std::cin >> toLabel;
-
-    vertex *from = g->findVertex(fromLabel);
-    vertex *to = g->findVertex(toLabel);
-
-    for (i = 0; i < this->numberOfEdges; i++)
+    for (int i = 0; i < this->numberOfEdges; i++)
     {
-        this->edgesArray[i].setData(edgeLabel, from, to);
+        std::cout << "Enter Edge Label for vertex " << this->label << ": ";
+        std::cin >> edgeLabel;
+
+        std::cout << "Enter To Label for edge " << edgeLabel << ": ";
+        std::cin >> toLabel;
+
+        vertex *from = g->findVertex(fromLabel);
+        vertex *to = g->findVertex(toLabel);
+
+        if (!to)
+        {
+            to = new vertex(toLabel);
+        }
+
+        if (from)
+        {
+            this->edgesArray[i].setData(edgeLabel, from, to);
+        }
+        else
+        {
+            std::cout << "Error: Invalid vertex label entered. Edge not set." << std::endl;
+            i--;
+        }
     }
 }
 

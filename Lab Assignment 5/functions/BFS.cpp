@@ -5,34 +5,44 @@
 #include "vertex.cpp"
 #include "queue.cpp"
 
-void graph::BFS(vertex * source)
+void graph::BFS(vertex *source)
 {
+    for (int i = 0; i < this->getNumberOfVertex(); i++)
+    {
+        this->vertexArray[i].updateExplore(false);
+    }
+
     int queueSize = getNumberOfVertex();
     queue q1(queueSize);
 
-    source->updateExplore(true);
-
     std::cout << "BFS traversal from source " << source->getLabel() << ": ";
-    std::cout << source->getLabel() << " -> ";
 
-    q1.enqueue(source);
-
-    while (!q1.isEmpty())
+    for (int i = 0; i < this->getNumberOfVertex(); i++)
     {
-        vertex *temp = q1.dequeue();
-
-        for (int i = 0; i < temp->getNumberOfEdges(); i++)
+        vertex *temp = &this->vertexArray[i];
+        if (!temp->checkExplore())
         {
-            vertex *toVertex = temp->edgesArray[i].getToVertex();
-            if (!toVertex->checkExplore())
+            temp->updateExplore(true);
+            std::cout << temp->getLabel() << " -> ";
+            q1.enqueue(temp);
+
+            while (!q1.isEmpty())
             {
-                toVertex->updateExplore(true);
-                std::cout << toVertex->getLabel() << " -> ";
-                q1.enqueue(toVertex);
+                vertex *current = q1.dequeue();
+
+                for (int j = 0; j < current->getNumberOfEdges(); j++)
+                {
+                    vertex *toVertex = current->edgesArray[j].getToVertex();
+                    if (!toVertex->checkExplore())
+                    {
+                        toVertex->updateExplore(true);
+                        std::cout << toVertex->getLabel() << " -> ";
+                        q1.enqueue(toVertex);
+                    }
+                }
             }
         }
     }
-
     std::cout << std::endl;
 }
 

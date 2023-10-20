@@ -21,17 +21,6 @@ bool graph::isSinglyConnected()
             }
         }
     }
-
-    for (int i = 0; i < this->numberOfVertex; i++)
-    {
-        classifyEdges(&this->vertexArray[i]);
-        for (int j = 0; j < this->numberOfEdges; j++)
-        {
-            if (this->edgeArray[i]->getEdgeClassification() == 'f')
-                return false;
-        }
-    }
-
     return true;
 }
 

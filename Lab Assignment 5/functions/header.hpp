@@ -45,6 +45,7 @@ public:
     int countPaths(vertex *source, vertex *destination);
     void DFS_for_singlyConnected(vertex *source, vertex *destination, int &count);
     bool isSinglyConnected();
+    void printEdgesByClassification(char classification);
 };
 
 class vertex
