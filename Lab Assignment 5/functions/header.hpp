@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include<climits>
 
 class vertex;
 class edge;
@@ -36,6 +37,9 @@ public:
     bool DFS_Cycle(vertex *source);
     void TopoSort();
     void DFSTopo(vertex *source, stack * s);
+    int diameter();
+    void AugmentedBFS(vertex * source);
+    int shortestPath(vertex * source, vertex * destination);
 };
 
 class vertex
@@ -46,6 +50,7 @@ private:
     bool isExplored;
     bool onStack;
     int topoOrder;
+    int distance;
 
 public:
     edge *edgesArray;
@@ -63,6 +68,8 @@ public:
     bool checkOnStack();
     void setTopoOrder(int n);
     int getTopoOrder();
+    void setDistance(int n);
+    int getDistance();
 };
 
 #endif // HEADER_H

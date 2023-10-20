@@ -8,6 +8,7 @@ vertex::vertex()
 {
     this->isExplored = false;
     this->onStack = false;
+    this->distance = INT32_MAX;
 }
 
 vertex::vertex(char label)
@@ -15,6 +16,7 @@ vertex::vertex(char label)
     this->label = label;
     this->isExplored = false;
     this->onStack = false;
+    this->distance = INT32_MAX;
 }
 
 void vertex::inputEdges(graph *g)
@@ -90,6 +92,16 @@ void vertex::setTopoOrder(int n)
 int vertex::getTopoOrder()
 {
     return this->topoOrder;
+}
+
+void vertex::setDistance(int n)
+{
+    this->distance = n;
+}
+
+int vertex::getDistance()
+{
+    return this->distance;
 }
 
 #endif // VERTEX

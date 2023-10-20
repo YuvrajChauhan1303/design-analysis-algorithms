@@ -5,6 +5,7 @@
 #include "functions/graphutils.cpp"
 #include "functions/checkCycle.cpp"
 #include "functions/DFSTopo.cpp"
+#include "functions/diameter.cpp"
 
 #define nl std::cout<<std::endl 
 
@@ -51,6 +52,11 @@ int main()
     isCycle ? std::cout << "Is a Cycle" : std::cout << "Is NOT a Cycle"; nl; 
     g1->resetExplored();
     g1->TopoSort();
+
+    nl; nl;
+
+    g1->resetExplored();
+    std::cout << "The Diameter of the Graph is: " <<g1->diameter(); nl;
 
     return 0;
 }
