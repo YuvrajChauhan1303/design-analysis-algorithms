@@ -5,24 +5,17 @@
 #include "vertex.cpp"
 #include "queue.cpp"
 
-void graph::BFS(char source)
+void graph::BFS(vertex * source)
 {
-    vertex *sourceVertex = findVertex(source);
-    if (!sourceVertex)
-    {
-        std::cout << "Source vertex not found in the graph." << std::endl;
-        return;
-    }
-
     int queueSize = getNumberOfVertex();
     queue q1(queueSize);
 
-    sourceVertex->updateExplore(true);
+    source->updateExplore(true);
 
-    std::cout << "BFS traversal from source " << source << ": ";
-    std::cout << source << " -> ";
+    std::cout << "BFS traversal from source " << source->getLabel() << ": ";
+    std::cout << source->getLabel() << " -> ";
 
-    q1.enqueue(sourceVertex);
+    q1.enqueue(source);
 
     while (!q1.isEmpty())
     {

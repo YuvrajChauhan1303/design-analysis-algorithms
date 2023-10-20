@@ -1,8 +1,8 @@
-#ifndef HEADER_H 
+#ifndef HEADER_H
 #define HEADER_H
 
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 
 class vertex;
 class edge;
@@ -18,14 +18,40 @@ private:
 
 public:
     graph(int numberOfVertex, int numberOfEdges);
-    vertex **vertexArray;
+    vertex *vertexArray;
     edge **edgeArray;
     int getNumberOfVertex();
     vertex *findVertex(char label);
     void inputGraph();
     void createEdgeList();
     int getNumberOfEdges();
-    void BFS(char source);
+    void displayVertexList();
+    void displayEdgeList();
+    void resetExplored();
+
+    // Graph Algorithms
+    void BFS(vertex *source);
+    void DFS(vertex *source);
 };
 
-#endif //HEADER_H
+class vertex
+{
+private:
+    char label;
+    int numberOfEdges;
+    bool isExplored;
+
+public:
+    edge *edgesArray;
+    vertex();
+    vertex(char label);
+    void setLabel(char label);
+    void inputEdges(graph *g);
+    void setEdges(int n);
+    char getLabel();
+    int getNumberOfEdges();
+    bool checkExplore();
+    void updateExplore(bool value);
+};
+
+#endif // HEADER_H

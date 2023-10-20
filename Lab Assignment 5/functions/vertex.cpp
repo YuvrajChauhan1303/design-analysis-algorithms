@@ -4,29 +4,14 @@
 #include "graph.cpp"
 #include "edge.cpp"
 
-class vertex
+vertex::vertex()
 {
-private:
-    char label;
-    int numberOfEdges;
-    bool isExplored;
+    this->isExplored = false;
+}
 
-public:
-    edge *edgesArray;
-    vertex(char label, int numberOfEdges);
-    void inputEdges(graph *g);
-    void setEdges(int n);
-    char getLabel();
-    int getNumberOfEdges();
-    bool checkExplore();
-    void updateExplore(bool value);
-};
-
-vertex::vertex(char label, int numberOfEdges)
+vertex::vertex(char label)
 {
     this->label = label;
-    this->numberOfEdges = numberOfEdges;
-    this->edgesArray = new edge[numberOfEdges];
     this->isExplored = false;
 }
 
@@ -55,6 +40,7 @@ void vertex::inputEdges(graph *g)
 void vertex::setEdges(int n)
 {
     this->numberOfEdges = n;
+    this->edgesArray = new edge[n];
 }
 
 char vertex::getLabel()
@@ -75,6 +61,11 @@ bool vertex::checkExplore()
 void vertex::updateExplore(bool value)
 {
     this->isExplored = value;
+}
+
+void vertex::setLabel(char label)
+{   
+    this->label = label;
 }
 
 #endif // VERTEX
