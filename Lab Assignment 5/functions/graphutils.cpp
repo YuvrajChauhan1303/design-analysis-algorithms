@@ -20,10 +20,22 @@ void graph::displayEdgeList()
 
 void graph::resetExplored()
 {
-    for(int i = 0 ; i < this->getNumberOfVertex() ; i++)
+    for (int i = 0; i < this->getNumberOfVertex(); i++)
     {
         vertexArray[i].updateExplore(false);
     }
+}
+
+char edge::getEdgeClassification()
+{
+    if (this->isForward)
+        return 'f';
+    if (this->isBack)
+        return 'b';
+    if (this->isForward)
+        return 'c';
+
+    return 't';
 }
 
 #endif

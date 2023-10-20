@@ -9,6 +9,7 @@ vertex::vertex()
     this->isExplored = false;
     this->onStack = false;
     this->distance = INT32_MAX;
+    this->time = 0;
 }
 
 vertex::vertex(char label)
@@ -17,6 +18,7 @@ vertex::vertex(char label)
     this->isExplored = false;
     this->onStack = false;
     this->distance = INT32_MAX;
+    this->time = 0;
 }
 
 void vertex::inputEdges(graph *g)
@@ -102,6 +104,15 @@ void vertex::setDistance(int n)
 int vertex::getDistance()
 {
     return this->distance;
+}
+
+int vertex::getTime()
+{
+    return this->time;
+}
+void vertex::setTime(int n)
+{
+    this->time = n;
 }
 
 #endif // VERTEX

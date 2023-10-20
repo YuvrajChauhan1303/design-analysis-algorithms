@@ -11,7 +11,7 @@ graph::graph(int numberOfVertex, int numberOfEdges)
     this->numberOfEdges = numberOfEdges;
     this->numberOfVertex = numberOfVertex;
     this->vertexArray = new vertex[numberOfVertex];
-    this->edgeArray = new edge*[numberOfEdges];
+    this->edgeArray = new edge *[numberOfEdges];
 }
 
 int graph::getNumberOfVertex()
@@ -49,7 +49,7 @@ void graph::inputGraph()
         this->vertexArray[i].setLabel(vertexLabel);
     }
 
-    for(i = 0; i < this->getNumberOfVertex(); i++)
+    for (i = 0; i < this->getNumberOfVertex(); i++)
     {
         std::cout << "Enter Number of Edges for Vertex " << this->vertexArray[i].getLabel() << " : ";
 
@@ -66,12 +66,24 @@ void graph::inputGraph()
 void graph::createEdgeList()
 {
     int k = 0;
-    for(int i = 0 ; i<this->numberOfVertex ; i++)
+    for (int i = 0; i < this->numberOfVertex; i++)
     {
-        for(int j = 0 ; j<this->vertexArray[i].getNumberOfEdges();j++)
+        for (int j = 0; j < this->vertexArray[i].getNumberOfEdges(); j++)
         {
             this->edgeArray[k++] = new edge(vertexArray[i].edgesArray[j]);
         }
+    }
+}
+void graph::deleteEdgeArray()
+{
+    if (edgeArray != nullptr)
+    {
+        for (int i = 0; i < numberOfEdges; i++)
+        {
+            delete edgeArray[i];
+        }
+        delete[] edgeArray;
+        edgeArray = nullptr;
     }
 }
 #endif

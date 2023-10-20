@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include<climits>
+#include <climits>
 
 class vertex;
 class edge;
@@ -29,6 +29,7 @@ public:
     void displayVertexList();
     void displayEdgeList();
     void resetExplored();
+    void deleteEdgeArray();
 
     // Graph Algorithms
     void BFS(vertex *source);
@@ -36,10 +37,14 @@ public:
     bool checkCycle();
     bool DFS_Cycle(vertex *source);
     void TopoSort();
-    void DFSTopo(vertex *source, stack * s);
+    void DFSTopo(vertex *source, stack *s);
+    void classifyEdges(vertex *source);
     int diameter();
-    void AugmentedBFS(vertex * source);
-    int shortestPath(vertex * source, vertex * destination);
+    void AugmentedBFS(vertex *source);
+    int shortestPath(vertex *source, vertex *destination);
+    int countPaths(vertex *source, vertex *destination);
+    void DFS_for_singlyConnected(vertex *source, vertex *destination, int &count);
+    bool isSinglyConnected();
 };
 
 class vertex
@@ -51,6 +56,7 @@ private:
     bool onStack;
     int topoOrder;
     int distance;
+    int time;
 
 public:
     edge *edgesArray;
@@ -70,6 +76,8 @@ public:
     int getTopoOrder();
     void setDistance(int n);
     int getDistance();
+    int getTime();
+    void setTime(int n);
 };
 
 #endif // HEADER_H
