@@ -1,5 +1,8 @@
 #include "functions/header.hpp"
+#include "functions/header.cpp"
 #include "functions/huffman.cpp"
+
+#define ln cout << endl
 
 /*
     1. input characters from user
@@ -27,6 +30,17 @@ int main()
 
         h[i].setData(c, f);
     }
+
+    ln;
+    cout << "Before Sort: ";
+    ln;
+    display(h, size);
+
+    huffmanSort(h, 0, size - 1);
+
+    cout << "After Sort: ";
+    ln;
+    display(h, size);
 
     return 0;
 }
