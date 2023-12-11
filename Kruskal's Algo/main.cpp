@@ -5,11 +5,6 @@ using namespace std;
 int main()
 {
     graph myGraph;
-
-    myGraph.displayEdgeList();
-
-    myGraph.displayVertexList();
-
     vector<edge> mst = myGraph.kruskalMST();
 
     cout << "Minimum Spanning Tree Edges:\n";

@@ -72,6 +72,8 @@ graph::graph()
 
     } while (input != -1);
 
+
+
     do
     {
         cout << "Enter Edge Label(! Quits): ";
@@ -96,7 +98,7 @@ graph::graph()
         int a = findVertex(fromIndex);
         this->Vertex.at(a).addEdge(label, fromIndex, toIndex, weight);
 
-    } while (label != '!');
+    } while (label != '!'); 
 }
 
 vector<edge> graph::kruskalMST()

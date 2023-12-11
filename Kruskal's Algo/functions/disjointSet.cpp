@@ -3,14 +3,13 @@
 
 #include "kruskal.hpp"
 
-
 class DisjointSet
 {
 private:
-    vector<int> parent, rank;
+    vector<int> parent, size;
 
 public:
-    DisjointSet(int n) : parent(n), rank(n, 0)
+    DisjointSet(int n) : parent(n), size(n, 1)
     {
         for (int i = 0; i < n; ++i)
             parent[i] = i;
@@ -30,14 +29,15 @@ public:
 
         if (rootU != rootV)
         {
-            if (rank[rootU] > rank[rootV])
-                parent[rootV] = rootU;
-            else if (rank[rootU] < rank[rootV])
-                parent[rootU] = rootV;
-            else
+            if (size[rootU] > size[rootV])
             {
                 parent[rootV] = rootU;
-                rank[rootU]++;
+                size[rootU] += size[rootV];
+            }
+            else
+            {
+                parent[rootU] = rootV;
+                size[rootV] += size[rootU];
             }
         }
     }
