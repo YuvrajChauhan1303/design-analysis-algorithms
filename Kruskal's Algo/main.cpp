@@ -8,7 +8,7 @@ int main()
     vector<edge> mst = myGraph.kruskalMST();
 
     cout << "Minimum Spanning Tree Edges:\n";
-    for (const auto &e : mst)
+    for (auto &e : mst)
     {
         cout << "Label: " << e.getLabel() << ", From: " << e.getFromIndex() << ", To: " << e.getToIndex() << ", Weight: " << e.getWeight() << "\n";
     }

@@ -15,29 +15,29 @@ public:
         this->weight = weight;
     }
 
-    char getLabel() const;
-    int getFromIndex() const;
-    int getToIndex() const;
-    int getWeight() const;
+    char getLabel();
+    int getFromIndex();
+    int getToIndex();
+    int getWeight();
 };
 
 
-char edge::getLabel() const
+char edge::getLabel()
 {
     return label;
 }
 
-int edge::getFromIndex() const
+int edge::getFromIndex()
 {
     return fromIndex;
 }
 
-int edge::getToIndex() const
+int edge::getToIndex()
 {
     return toIndex;
 }
 
-int edge::getWeight() const
+int edge::getWeight()
 {
     return weight;
 }

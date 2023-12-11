@@ -25,7 +25,7 @@ public:
     void displayEdgeList()
     {
         cout << "Edge List:\n";
-        for (const auto &e : globalList)
+        for (auto &e : globalList)
         {
             cout << "Label: " << e.getLabel() << ", From: " << e.getFromIndex() << ", To: " << e.getToIndex() << ", Weight: " << e.getWeight() << "\n";
         }
@@ -34,12 +34,12 @@ public:
     void displayVertexList()
     {
         cout << "Vertex List:\n";
-        for (const auto &v : Vertex)
+        for (auto &v : Vertex)
         {
             cout << "Vertex Label: " << v.getLabel() << "\n";
-            for (const auto &edgeIndex : v.getEdgeIndices())
+            for (auto &edgeIndex : v.getEdgeIndices())
             {
-                const edge &e = globalList[edgeIndex];
+                edge &e = globalList[edgeIndex];
                 cout << "  Edge Label: " << e.getLabel() << ", From: " << e.getFromIndex() << ", To: " << e.getToIndex() << ", Weight: " << e.getWeight() << "\n";
             }
             cout << "\n";
@@ -105,7 +105,7 @@ vector<edge> graph::kruskalMST()
 {
     
     sort(globalList.begin(), globalList.end(),
-         [](const edge &a, const edge &b)
+         [](edge &a, edge &b)
          {
              return a.getWeight() < b.getWeight();
          });
@@ -114,7 +114,7 @@ vector<edge> graph::kruskalMST()
 
     DisjointSet ds(Vertex.size());
 
-    for (const auto &e : globalList)
+    for (auto &e : globalList)
     {
         int fromIndex = e.getFromIndex();
         int toIndex = e.getToIndex();

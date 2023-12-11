@@ -17,8 +17,8 @@ public:
 
     void addEdge(char label, int fromIndex, int toIndex, int weight);
 
-    int getLabel() const;
-    const vector<int>& getEdgeIndices() const;
+    int getLabel();
+    const vector<int>& getEdgeIndices();
 };
 
 vector<edge> globalList;
@@ -37,14 +37,15 @@ void vertex::addEdge(char label, int fromIndex, int toIndex, int weight)
     globalList.push_back(Edge);
 }
 
-int vertex::getLabel() const
+int vertex::getLabel()
 {
     return this->label;
 }
 
-const vector<int>& vertex::getEdgeIndices() const
+const vector<int>& vertex::getEdgeIndices() 
 {
     return edgeIndices;
 }
 
 #endif
+
